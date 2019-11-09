@@ -1,0 +1,7 @@
+<h1>Lista de paises</h1>
+
+
+@foreach (var pais in @ViewBag.Paises) {
+    <h1><a href="https://www.google.com/search?q="@pais.Descricao>@pais.Descricao</a></h1>
+}
+

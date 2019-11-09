@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide">
+            <ol class="carousel-indicators">
+                <li data-target="#main-slider" data-slide-to="0" class="active"></li>
+                <li data-target="#main-slider" data-slide-to="1"></li>
+                <!-- <li data-target="#main-slider" data-slide-to="2"></li> -->
+            </ol>
+            <div class="carousel-inner">
+
+                <div class="item active" style="background-image: url(../images/slider/tacadevinhobg4.jpg)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="carousel-content">
+                                    <h1 class="animation animated-item-1">System Wine</h1>
+                                    <div class="animation animated-item-2">
+                                        Encontre a melhor opção aqui no site
+                                    </div>
+                                        <!-- @if (!SignInManager.IsSignedIn(User))
+                                            {
+                                            <a class="btn-slide animation animated-item-3" asp-controller="Login" asp-action="Index">Login</a>
+                                            }
+                                    
+                                    <a class="btn-slide animation animated-item-3" asp-controller="Registro" asp-action="Index">Registre-se</a> -->
+                                    <!-- <a class="btn-slide animation animated-item-3" href="#">Login</a> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.item-->
+
+                <div class="item" style="background-image: url(../images/slider/vinhos1.jpg)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="carousel-content">
+                                    <h1 class="animation animated-item-1">Quem somos</h1> 
+                                    <div class="animation animated-item-2">
+                                        Somos conhecidas mundialmente pelo melhor Sistema de Recomendação de vinhos.<br/>
+                                        Nosso objetivo é facilitar as suas decisões na hora de escolher um bom vinho.
+                                    </div>
+                                    <a class="btn-slide white animation animated-item-3" href="#">Saiba mais</a>
+                                    <!-- <a class="btn-slide animation animated-item-3" href="#">Get Started</a> -->
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.item-->
+
+            </div>
+            <!--/.carousel-inner-->
+        </div>
+        <!--/.carousel-->
+        <a class="prev hidden-xs hidden-sm" href="#main-slider" data-slide="prev">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+        <a class="next hidden-xs hidden-sm" href="#main-slider" data-slide="next">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+    </section>
+

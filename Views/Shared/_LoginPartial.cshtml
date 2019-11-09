@@ -1,0 +1,41 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="nav navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Olá @User.Identity.Name</a>
+    </li>
+    <li class="dropdown">  
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vinhos  <i class="fa fa-angle-down"></i></a>
+        <ul class="dropdown-menu">
+            <li><a asp-controller="Tipos" asp-action="Index">Tipos</a></li>
+                                <li><a href="#">Ocasião</a></li>
+                                <li><a href="#">Uvas</a></li>
+                                <li><a href="#">Países</a></li>
+                                <li><a href="#">Região</a></li>
+        </ul>
+        <!-- <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Vinhos</a> -->
+    </li>
+     <li class="nav-item">  
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Recomendações</a>
+    </li>
+    <li class="nav-item">
+        <form class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  class="nav-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Registro</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
+</ul>
+

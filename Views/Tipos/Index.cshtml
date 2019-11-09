@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="\css\style.css">
+</head>
+
+<body>
+<!-- @{
+    ViewData["Title"] = "Tipos de Vinhos";
+}
+<h2 class="text-center">@ViewData["Title"]</h2> -->
+
+
+<div class="row">
+    <form>
+      <div class="form-group">
+        <select class="form-control" id=cbTipo onchange="mudarFiltro(this.value);">
+        <option value=0>Selecione um tipo...</option>
+        <option value=0>Todos</option>
+        @foreach (var tipoVinho in @ViewBag.ListaTipos)
+        {
+          <option value=@tipoVinho.Id>@tipoVinho.Descricao</option>
+        }
+      </select>          
+      </div>    
+    </form>
+</div>
+
+
+<div class="row">
+
+<h1>@ViewBag.abc </h1>
+
+  @if (@ViewBag.Vinhos != null)
+  {
+  
+
+  @foreach (var vinho in @ViewBag.Vinhos){
+  <div class="col-lg-4 mb-5 col-md-6">
+    <div class="wine_v_1 text-center pb-4">
+      <a href="shop-single.html" class="thumbnail d-block mb-4"><img src="images/wine_1.png" alt="Image" class="img-fluid"></a>
+      <h3 class="heading mb-1"><a href="#">@vinho.Descricao</a></h3>
+    </div>
+    <span class="Uva"><b>Uva:</b> R$ @vinho.</span>
+    <span class="price"><b>Valor:</b> R$ @vinho.Valor</span>
+    <div class="rate">
+      <input type="radio" id="star5@(vinho.Id)" name="rate" value="5" />
+      <label for="star5@(vinho.Id)" title="text">5 stars</label>
+      <input type="radio" id="star4@(vinho.Id)" name="rate" value="4" />
+      <label for="star4@(vinho.Id)" title="text">4 stars</label>
+      <input type="radio" id="star3@(vinho.Id)" name="rate" value="3" />
+      <label for="star3@(vinho.Id)" title="text">3 stars</label>
+      <input type="radio" id="star2@(vinho.Id)" name="rate" value="2" />
+      <label for="star2@(vinho.Id)" title="text">2 stars</label>
+      <input type="radio" id="star1@(vinho.Id)" name="rate" value="1" />
+      <label for="star1@(vinho.Id)" title="text">1 star</label>
+    </div>
+  </div>
+  }  
+  
+  }
+
+</div>
+
+              
+             
+
+                
+                <!-- <a href="cart.html" class="btn add"><span class="icon-shopping-bag mr-3"></span> Add to Cart</a> -->
+              </div>
+            </div>
+          </div>
+          
+    </div>
+    </br>
+    </br>
+    </body>
+    <script type="text/javascript">
+      function mudarFiltro(id)
+      {
+        window.location.href = "https://localhost:5001/Tipos?idTipo=" + id;
+      }
+    </script>
+      
+  </html>
+  <!-- <p>Use this page to detail your site's privacy policy.</p>
+
+<div class="row">
+  <div class="coluna">
+    <img src="\images\slider\vinhos1.jpg" alt="descrição da imagem" style="width:100%">
+  </div>
+  <div class="coluna">
+    <img src="\images\slider\vinhos1.jpg" alt="descrição da imagem" style="width:100%">
+  </div>
+  <div class="coluna">
+    <img src="\images\slider\vinhos1.jpg" alt="descrição da imagem" style="width:100%">
+  </div></div>
+
+
+<style>
+.coluna{
+  float: left;
+  width: 20%;
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+
+<div class="rating">
+        <a href="http://endereceobackend/api/voteuserwine/1/1/1"><span class="glyphicon glyphicon-star"></span></a>
+        <a href="http://endereceobackend/api/voteuserwine/1/1/2"><span class="glyphicon glyphicon-star"></span></a>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star-empty"></span>
+</div> -->
