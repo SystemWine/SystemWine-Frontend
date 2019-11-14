@@ -21,7 +21,7 @@ namespace frontend.Controllers
         public TiposController (ApplicationDbContext context, IWineServices wineServices)
         {
             _context = context;
-            _wineServices = wineServices;
+            // _wineServices = wineServices;
         }
 
         // [Route("tipos/{idPais?}")]
@@ -42,14 +42,14 @@ namespace frontend.Controllers
             // IEnumerable<TipoVinho> listaTipos = _context.TiposVinho;
 
             ViewBag.ListaTipos = _context.TipoVinho;
-            var abc = _wineServices.teste().Result;
+            // var abc = _wineServices.teste().Result;
 
             IEnumerable<Vinho> vinhosFiltrados = 
                 _context.Vinhos.Where(x => x.TipoVinho.Id == idTipo || idTipo == 0).ToList();
 
             ViewBag.Vinhos = vinhosFiltrados;
 
-            ViewBag.abc = abc;
+            ViewBag.abc = "";
 
             return View();
         }
@@ -68,6 +68,20 @@ namespace frontend.Controllers
             _context.Vinhos.Add(vinho);
             _context.SaveChanges();
 
+            return "";
+        }
+
+        public ActionResult<string> Cubanacan(int idUsuario, int idVinho, double nota)
+         {
+            // UsuarioNotaVinho usuarioNotaVinho = _context.UsuariosNotaVinho;
+            UsuarioNotaVinho usuarioNotaVinho = new UsuarioNotaVinho();
+            usuarioNotaVinho.IdUsuario = idUsuario;
+            usuarioNotaVinho.IdVinho = idVinho;
+            usuarioNotaVinho.Nota = nota;
+            usuarioNotaVinho.Data = DateTime.Now;
+
+            _context.UsuariosNotaVinhos.Add(usuarioNotaVinho);
+            _context.SaveChanges();
             return "";
         }
 
