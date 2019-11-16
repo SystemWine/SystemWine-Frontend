@@ -58,7 +58,7 @@
       @for(int nota = 5; nota > 0; nota--)
       {
         <input type="radio" id="star@(vinho.Id)_@nota" name="rate@(vinho.Id)" value="@nota" />
-        <label for="star@(vinho.Id)_@nota" onClick="votar(@vinho.Id, 1, @nota)" title="@nota">nota</label>
+        <label for="star@(vinho.Id)_@nota" onClick="votar(@vinho.Id, @nota)" title="@nota">nota</label>
       }
     </div>
   </div>
@@ -87,9 +87,9 @@
         window.location.href = "https://localhost:5001/Tipos?idTipo=" + id;
       }
 
-      function votar(idVinho, idUsuario, nota)
+      function votar(idVinho, nota)
       {
-        window.location.href = `https://localhost:5001/Tipos/Cubanacan?idUsuario=${idUsuario}&idVinho=${idVinho}&nota=${nota}`;
+        window.location.href = `https://localhost:5001/Tipos/Cubanacan?idVinho=${idVinho}&nota=${nota}`;
       }
     </script>
       

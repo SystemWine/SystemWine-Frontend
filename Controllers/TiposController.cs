@@ -9,6 +9,8 @@ using frontend.Data;
 using Frontend.Models;
 using frontend.Services;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace frontend.Controllers
 {
@@ -71,14 +73,17 @@ namespace frontend.Controllers
             return "";
         }
 
-        public ActionResult<string> Cubanacan(int idUsuario, int idVinho, double nota)
+        public ActionResult<string> Cubanacan(int idVinho, double nota)
          {
+            IdentityUser usuario = new IdentityUser(this.User.FindFirstValue(ClaimTypes.Email));  
             // UsuarioNotaVinho usuarioNotaVinho = _context.UsuariosNotaVinho;
             UsuarioNotaVinho usuarioNotaVinho = new UsuarioNotaVinho();
-            usuarioNotaVinho.IdUsuario = idUsuario;
+            usuarioNotaVinho.Usuario = usuario;
             usuarioNotaVinho.IdVinho = idVinho;
             usuarioNotaVinho.Nota = nota;
             usuarioNotaVinho.Data = DateTime.Now;
+
+            // Console.WriteLine(userId);
 
             _context.UsuariosNotaVinhos.Add(usuarioNotaVinho);
             _context.SaveChanges();

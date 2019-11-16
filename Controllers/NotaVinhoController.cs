@@ -30,7 +30,7 @@ namespace Frontend.Controllers
             // insere nota vinho
             UsuarioNotaVinho votoUsuario = new UsuarioNotaVinho();
             votoUsuario.IdVinho = voto.IdVinho;
-            votoUsuario.IdUsuario = voto.IdUsuario;
+            // votoUsuario.IdUsuario = voto.IdUsuario;
             votoUsuario.Nota = voto.Nota;
             votoUsuario.Data = DateTime.Now;
             _context.UsuariosNotaVinhos.Add(votoUsuario);
