@@ -30,18 +30,6 @@
 
 <div class="row">
 
-  <button>
-    <a asp-controller="Tipos" 
-    asp-action="Cubanacan" 
-    asp-route-idUsuario = "188"
-    asp-route-idVinho = "1"
-    asp-route-nota = "5"
-    >
-    </a>
-  </button>
-
-<h1>@ViewBag.abc </h1>
-
   @if (@ViewBag.Vinhos != null)
   {
   
@@ -52,7 +40,7 @@
       <a href="shop-single.html" class="thumbnail d-block mb-4"><img src="images/wine_1.png" alt="Image" class="img-fluid"></a>
       <h3 class="heading mb-1"><a href="#">@vinho.Descricao</a></h3>
     </div>
-    <span class="Uva"><b>Uva:</b> FAZER JOIN</span>
+    <span class="Uva"><b>Uva:</b> @vinho.TipoUva</span>
     <span class="price"><b>Valor:</b> R$ @vinho.Valor</span>
     <div class="rate">
       @for(int nota = 5; nota > 0; nota--)

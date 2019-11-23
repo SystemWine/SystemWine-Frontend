@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using frontend.Models;
 using frontend.Data;
 using Frontend.Models;
+using Frontend.DTOs;
 using frontend.Services;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.AspNetCore.Identity;
@@ -46,10 +47,24 @@ namespace frontend.Controllers
             ViewBag.ListaTipos = _context.TipoVinho;
             // var abc = _wineServices.teste().Result;
 
-            IEnumerable<Vinho> vinhosFiltrados = 
-                _context.Vinhos.Where(x => x.TipoVinho.Id == idTipo || idTipo == 0).ToList();
+            var vinhos = (
 
-            ViewBag.Vinhos = vinhosFiltrados;
+                from v in _context.Vinhos
+                join tu in _context.TiposUva on v.IdTipoUva equals tu.Id
+                where (v.TipoVinho.Id == idTipo || idTipo == 0)
+                select new VinhoExibirListaDTO {
+                    Id = v.Id,
+                    Descricao = v.Descricao,
+                    Valor = v.Valor,
+                    TipoUva = tu.Descricao,
+                    TipoVinho = ""
+                }
+            ).ToList();
+
+            // IEnumerable<Vinho> vinhosFiltrados = 
+            //     _context.Vinhos.Where(x => x.TipoVinho.Id == idTipo || idTipo == 0).ToList();
+
+            ViewBag.Vinhos = vinhos;
 
             ViewBag.abc = "";
 
