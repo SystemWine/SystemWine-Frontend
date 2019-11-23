@@ -17,13 +17,15 @@ namespace frontend.Controllers
 {
     public class TiposController : Controller
     {
-
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+
         private IWineServices _wineServices;
 
-        public TiposController (ApplicationDbContext context, IWineServices wineServices)
+        public TiposController (ApplicationDbContext context, IWineServices wineServices, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
             // _wineServices = wineServices;
         }
 
@@ -88,19 +90,33 @@ namespace frontend.Controllers
             return "";
         }
 
+        private Task<IdentityUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+
         public ActionResult<string> Cubanacan(int idVinho, double nota)
          {
-            IdentityUser usuario = new IdentityUser(this.User.FindFirstValue(ClaimTypes.Email));  
+            IdentityUser usuario = GetCurrentUserAsync().Result;
+
             // UsuarioNotaVinho usuarioNotaVinho = _context.UsuariosNotaVinho;
-            UsuarioNotaVinho usuarioNotaVinho = new UsuarioNotaVinho();
-            usuarioNotaVinho.Usuario = usuario;
-            usuarioNotaVinho.IdVinho = idVinho;
-            usuarioNotaVinho.Nota = nota;
-            usuarioNotaVinho.Data = DateTime.Now;
 
-            // Console.WriteLine(userId);
+            //busca a relacao no banco
+            UsuarioNotaVinho notaAtual = _context.UsuariosNotaVinhos
+                .Where(x => x.IdVinho == idVinho 
+                         && x.Usuario.Id == usuario.Id).FirstOrDefault();
 
-            _context.UsuariosNotaVinhos.Add(usuarioNotaVinho);
+            if (notaAtual == null)
+            {
+                notaAtual = new UsuarioNotaVinho();
+                notaAtual.Usuario = usuario;
+                notaAtual.IdVinho = idVinho;
+                notaAtual.Nota = nota;
+                _context.UsuariosNotaVinhos.Add(notaAtual);
+            }
+            else
+            {
+                notaAtual.Nota = nota;
+            }
+            notaAtual.Data = DateTime.Now;
             _context.SaveChanges();
             return "";
         }
